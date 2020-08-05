@@ -6,11 +6,13 @@ import com.kwangmin.book.springboot.web.dto.PostsResponseDto;
 import com.kwangmin.book.springboot.web.dto.PostsSaveRequestDto;
 import com.kwangmin.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 public class PostsApiController {
+    @Autowired
     private final PostsService postsService;
 
     @PostMapping ("/api/v1/posts")
