@@ -1,5 +1,6 @@
 package com.kwangmin.book.springboot.domain.posts;
 
+import com.kwangmin.book.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor //기본생성자 자동 추가
 @Entity //테이블과 링크될 클래스임을 나타냄 ex) SalesManager.java -> sales_manager table함 , Entity 클래스에서는 절대 Setter메소드 안만든다
-public class Posts { //실제 DB의 테이블과 매칭될 클래스이며 보통 Entity클래스라고 한다.
+public class Posts extends BaseTimeEntity { //실제 DB의 테이블과 매칭될 클래스이며 보통 Entity클래스라고 한다.
     @Id //해당 테이블의 PK필드
     @GeneratedValue(strategy = GenerationType.IDENTITY) //PK의 생성 규칙을 나타낸다. GenerationType.IDENTITY : auto_increment
     private Long id;
