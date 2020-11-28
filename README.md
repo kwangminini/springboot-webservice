@@ -29,7 +29,7 @@
 - final이 없는 필드는 생성자에 포함되지 않는다
 
 #### @RequestParam
-
+- 외부에서 API로 넘긴 파라미터를 가져오는 어노테이션
 -----------------------------------
 ## 테스트 코드
 #### JUnit4의 @RunWith(SpringRunner.class)
