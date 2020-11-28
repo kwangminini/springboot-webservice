@@ -10,6 +10,8 @@
 - 프로젝트 시작할 때 인덱싱을 하여 파일을 비롯한 자원들에 대한 빠른 검색 속도
 - HTML과 CSS, JS, XML에 대한 강력한 기능 지원
 - 자바, 스프링 부트 버전업에 맞춘 빠른 업데이트
+---------------------------------------
+## Chapter 2. 스프링 부트에서 테스트 코드를 작성하자
 
 #### TDD (테스트 주도 개발)
 <img src="https://user-images.githubusercontent.com/48472989/100527307-a9891480-3214-11eb-9d2f-c0681ff25b36.png" width="40%" height="40%"></img>
@@ -48,5 +50,29 @@
 - 이 클래스를 통해 HTTP GET, POST 등에 대한 API테스트 가능
 
 #### assertThat
+```
+assertThat(dto.getName()).isEqualTo(name);
+```
 - assertj라는 테스트 검증 라이브러리의 검증 메소드
 - 검증하고 싶은 대상을 메소드 인자로 받는다
+
+#### param
+```
+mvc.perform(get("/hello/dto")
+                .param("name",name)
+                .param("amount",String.valueOf(amount))
+                .andExpect(jsonPath("$.name",is(name)));
+```
+- API테스트할 때 사용될 요청 파라미터를 설정
+- 단, 값은 String만 허용
+- 그래서 숫자/날짜 등의 데이터도 등록할 때는 문자열로 변경해야만 가능
+- jsonPath : JSON응답값을 필드별로 검증할 수 있는 메소드 / $를 기준으로 필드명을 명시
+------------------------------
+## Chapter 3. 스프링 부트에서 JPA로 데이터베이스 다뤄보자
+
+#### Spring Data JPA
+- 구현체들을 좀 더 쉽게 사용하고자 추상화 시킨 Spring Data JPA라는 모듈을 이용하여 JPA 기술을 다룬다
+- JPA <- Hibernate <- Spring Data JPA
+- 구현체 교체의 용이성 : Hibernate외에 다른 구현체로 쉽게 교체하기 위함
+- 저장소 교체의 용이성 : 관계형 데이터베이스 외에 다른 저장소로 쉽게 교체하기 위함
+
