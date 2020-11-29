@@ -148,3 +148,25 @@ public class Application {
 - 문법이 다른 템플릿 엔진(Thymeleaf 등)보다 심플
 - 로직코드를 사용할 수 없어 View의 역할과 서버의 역할을 명확하게 분리
 - Mustache.js와 Mustache.java 2가지가 다 있어, 하나의 문법으로 클라이언트/서버 템플릿을 모두 사용 가능
+
+#### @Query
+```
+public interface PostsRepository extends JpaRepository<Posts,Long>{
+  @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
+  List<Posts> findAllDesc();
+}
+```
+- SpringDataJpa에서 제공하지 않는 메소드는 위처럼 @Query 어노테이션을 이용해서 쿼리로 작성해도 된다
+- @Query가 가독성이 좋으니 선택해서 사용
+
+#### 참고사항!!
+- 규모가 있는 프로젝트에서는 데이터 조회는 FK의 조인, 복잡한 조건 등으로 인해 이런 Entity 클래스만으로 처리하기 어려워 조회용 프레임워크를 추가로 사용한다. 대표적인 예로 querydsl, jooq, MyBatis 등이 있다.
+  조회는 위 3가지 프레임워크 중 하나를 통해 조회되고, 등록/수정/삭제 등은 SpringDataJap를 통해 진행된다.
+  가장 추천되는 프레임워크 : Querydsl
+- Querydsl 추천 이유
+  - 타입 안정성이 보장 (단순한 문자열로 쿼리를 생성하는 것이 아니라, 메소드를 기반으로 쿼리를 생성하기 때문에 오타나 존재하지 않는 컬럼명을 명시할 경우 IDE에서 검출)
+  - 국내 많은 회사에서 사용 중 (쿠팡, 배민 등 JPA를 적극적으로 사용하는 회사에서는 Querydsl을 적극적으로 사용 중)
+  - 많은 레퍼런스 (많은 회사와 개발자들이 사용하다보니 그많큼 국내 자료 다양)
+  
+
+
