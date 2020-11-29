@@ -144,3 +144,8 @@ public class Application {
 ## Chapter 4. 머스테치로 화면 구성하기
 **머스테치 (http://mustache.github.io/)는 수많은 언어를 지원하는 가장 심플한 템플릿 엔진**
 
+#### 머스테치의 장점
+- 문법이 다른 템플릿 엔진(Thymeleaf 등)보다 심플
+- 로직코드를 사용할 수 없어 View의 역할과 서버의 역할을 명확하게 분리
+- Mustache.js와 Mustache.java 2가지가 다 있어, 하나의 문법으로 클라이언트/서버 템플릿을 모두 사용 가능
+
