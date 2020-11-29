@@ -112,5 +112,31 @@ mvc.perform(get("/hello/dto")
 - 절대로 Entity 클래스를 Request/Response 클래스로 사용하면 안됨
 - Entity 클래스와 Controller에서 쓸 Dto는 분리해서 사용해야 함
 
+#### 모든 Entity의 상위 클래스가 되어 Entity들의 createdDate, modifiedDate를 자동으로 관리하는 클래스
+```
+@Getter
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BaseTimeEntity {
+    @CreatedDate
+    private LocalDateTime createdDate;
 
+    @LastModifiedDate
+    private LocalDateTime modifiedDate;
+}
+```
+- @MappedSuperclass : JPA Entity 클래스들이 BaseTimeEntity를 상속할 경우 필드들(createdDate, modifiedDate)도 컬럼으로 인식하도록 함
+- @EntityListeners(AuditingEntityListener.class) : BaseTimeEntity 클래스에 Auditing 기능을 포함
+- @CreatedDate : Entity가 생성되어 저장할 때 시간이 자동 저장
+- @LastModifiedDate : 조회한 Entity의 값을 변경할 때 시간이 자동 저장
 
+#### JPA Auditing 어노테이션 활성화 (@EnableJpaAuditing)
+```
+@EnableJpaAuditing  //JPA Auditing 활성화
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+```
