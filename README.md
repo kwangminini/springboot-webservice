@@ -107,6 +107,10 @@ mvc.perform(get("/hello/dto")
 - 위의 3가지 방식 중 가장 권장하는 방식은 생성자로 주입받는 방식이다. (@RequiredArgsConstructor)
 - 그럼에도 불구하고 생성자를 직접 안쓰고 @Autowired를 사용하는 이유는 해당 클래스의 의존성 관계가 변경될 때마다 생성자 코드를 계속해서 수정하는 번거로움을 해결하기 위함
 
-#### Entity 
+#### Entity 클래스와 거의 유사함에도 Dto클래스를 추가로 생성
+- Entity 클래스는 데이터베이스와 맞닿는 핵심 클래스
+- 절대로 Entity 클래스를 Request/Response 클래스로 사용하면 안됨
+- Entity 클래스와 Controller에서 쓸 Dto는 분리해서 사용해야 함
+
 
 
