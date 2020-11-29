@@ -200,4 +200,49 @@ compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 ```
 - 소셜 로그인 등 클라이언트 입장에서 소셜 기능 구현 시 필요한 의존성
 
+### @EnableWebSecurity
+- Spring Security 설정들을 활성화
+
+```
+@Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/","/css/**","/images/**","/js/**","/h2-console/**").permitAll()
+                .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                .anyRequest().authenticated()
+                .and()
+                .logout().logoutSuccessUrl("/")
+                .and()
+                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
+    }
+```
+#### authorizeRequests
+- URL별 권한 관리를 설정하는 옵션의 시작점
+- authorizeRequests가 선언 되어야만 antMatchers 옵션 사용 가능
+
+#### antMatchers
+- 권한 관리 대상을 지정하는 옵션
+- URL, HTTP 메소드별로 관리가 가능
+- "/" 등 지정된 URL들은 permitAll()옵션을 통해 전체 열람 권한을 줌
+- POST메소드이면서 "/api/v1/**" 주소를 가진 API는 USER 권한을 가진 사람만 가능
+
+#### anyRequest
+- 설정된 값들 이외 나머지 URL
+- 여기서는 authenticated()를 추가하여 나머지 URL들은 모두 인증된 사용자(로그인)들에게만 허용
+
+#### logout().logoutSuccessUrl("/")
+- 로그아웃 기능에 대한 여러 설정의 진입점
+- 로그아웃 성공 시 / 주소로 이동
+
+#### oauth2Login
+- OAuth 2 로그인 기능에 대한 여러 설정의 진입점
+
+#### oauth2Login().userInfoEndpoint()
+- OAuth 2 로그인 성공 이후 사용자 정보를 가져올 때의 설정들을 담당
+
+#### oauth2Login().userInfoEndpoint().userService(customOAuth2UserService)
+- 소셜 로그인 성공 시 후속 조치를 진행할 UserService 인터페이스의 구현체를 등록
 
