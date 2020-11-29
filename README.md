@@ -168,5 +168,23 @@ public interface PostsRepository extends JpaRepository<Posts,Long>{
   - 국내 많은 회사에서 사용 중 (쿠팡, 배민 등 JPA를 적극적으로 사용하는 회사에서는 Querydsl을 적극적으로 사용 중)
   - 많은 레퍼런스 (많은 회사와 개발자들이 사용하다보니 그많큼 국내 자료 다양)
   
+------------------------------------------
+## Chapter 5. 스프링 시큐리티와 OAuth 2.0으로 로그인 기능 구현하기
 
-
+#### 구글 로그인 연동
+- 구글 서비스에 신규 서비스를 생성
+- 구글 플랫폼 (https://console.cloud.google.com)에 새 프로젝트 생성
+- 사용자 인증 정보 만들기 (Oauth 클라이언트 ID) 
+- 승인된 리다이렉션 URI
+  - 서비스에서 파라미터로 인증 정보를 주었을 때 인증이 성공하면 구글에서 리다이렉트할 URL
+  - 스프링 부트 2버전의 시큐리티에서는 기본적으로 {도메인}/login/oauth2/code/{소셜서비스코드}로 리다이렉트 URL을 지원
+  - 사용자가 별도로 리다이렉트 URL을 지원하는 Controller를 만들 필요가 없다 (시큐리티에서 이미 구현해 놓은 상태)
+  - 로컬 개발 단계에서는 http://localhost:8080/login/oauth2/code/google 로 등록
+  - AWS 서버에 배포하게 되면 localhost 외에 추가로 주소를 추가해야 한다
+- 클라이언트 ID와 클라이언트 보안 비밀 설정
+  - application-oauth.properties 생성
+    ```
+    spring.security.oauth2.client.registration.google.client-id=아이디
+    spring.security.oauth2.client.registration.google.client-secret=보안키
+    spring.security.oauth2.client.registration.google.scope=profile,email
+    ```
