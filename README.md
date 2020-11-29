@@ -188,3 +188,8 @@ public interface PostsRepository extends JpaRepository<Posts,Long>{
     spring.security.oauth2.client.registration.google.client-secret=보안키
     spring.security.oauth2.client.registration.google.scope=profile,email
     ```
+- application.properties
+```
+spring.profiles.include=oauth
+```
+- 보안을 위해 .gitignore 설정
