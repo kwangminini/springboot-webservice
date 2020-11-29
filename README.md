@@ -193,3 +193,11 @@ public interface PostsRepository extends JpaRepository<Posts,Long>{
 spring.profiles.include=oauth
 ```
 - 보안을 위해 .gitignore 설정
+
+#### 스프링 시큐리티 설정
+```
+compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+```
+- 소셜 로그인 등 클라이언트 입장에서 소셜 기능 구현 시 필요한 의존성
+
+
