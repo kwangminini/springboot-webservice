@@ -13,6 +13,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/h2-console/*").permitAll().
+                and().csrf().ignoringAntMatchers("/h2-console/**");
         http.csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
@@ -24,5 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/")
                 .and()
                 .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
+
     }
 }

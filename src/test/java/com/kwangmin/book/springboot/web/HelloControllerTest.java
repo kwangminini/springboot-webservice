@@ -1,10 +1,14 @@
 package com.kwangmin.book.springboot.web;
 
+import com.kwangmin.book.springboot.config.auth.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -17,12 +21,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)    //스프링 부트 테스트와 JUnit 사이에 연결자 역할을 함
-@WebMvcTest         //Web(Spring MVC)에 집중
+@WebMvcTest(controllers = HelloController.class,
+            excludeFilters = {
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+            })         //Web(Spring MVC)에 집중
 public class HelloControllerTest {
     @Autowired // 스프링이 관리하는 Bean을 주입
     private MockMvc mvc;    //이 클래스를 통해 HTTP GET, POST 등에 대한 API테스트를 할 수 있음
 
     @Test
+    @WithMockUser(roles = "USER")
     public void hello가_리턴된다() throws Exception{
         String hello = "hello";
         mvc.perform(get("/hello"))      //MockMvc를 통해 /hello 주소로 HTTP GET 요청
@@ -31,6 +39,7 @@ public class HelloControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     public void helloDto가_리턴된다() throws Exception{
         String name = "hello";
         int amount = 1000;
