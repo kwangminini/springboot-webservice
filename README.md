@@ -246,3 +246,14 @@ compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 #### oauth2Login().userInfoEndpoint().userService(customOAuth2UserService)
 - 소셜 로그인 성공 시 후속 조치를 진행할 UserService 인터페이스의 구현체를 등록
 
+#### 2대 이상의 서버에서 톰캣마다 세션 동기화
+- 톰캣 세션을 사용
+  - 일반적으로 별다른 설정을 하지 않을 때 기본적으로 선택되는 방식
+  - 이렇게 될 경우 톰캣(WAS)에 세션이 저장되기 때문에 2대 이상의 WAS가 구동되는 환경에서는 톰캣들 간의 세션 공유를 위한 추가 설정이 필요
+- MySQL과 같은 데이터베이스를 세션 저장소로 사용
+  - 여러 WAS 간의 공용 세션을 사용할 수 있는 가장 쉬운 방법
+  - 많은 설정이 필요 없지만, 결국 로그인 요청마다 DB IO가 발생하여 성능상 이슈가 발생
+  - 보통 로그인 요청이 많이 없는 백오피스, 사내 시스템 용도로 사용
+- Redis, Memchached와 같은 메모리 DB를 세션 저장소로 사용
+  - B2C 서비스에서 가장 많이 사용하는 방식
+  - 실제 서비스로 사용하기 위해서는 Embedded Redis와 같은 방식이 아닌 외부 메모리 서버가 필요
