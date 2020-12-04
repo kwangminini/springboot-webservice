@@ -257,3 +257,15 @@ compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 - Redis, Memchached와 같은 메모리 DB를 세션 저장소로 사용
   - B2C 서비스에서 가장 많이 사용하는 방식
   - 실제 서비스로 사용하기 위해서는 Embedded Redis와 같은 방식이 아닌 외부 메모리 서버가 필요
+
+## Chapter 6. AWS 서버 환경을 만들어보자 - AWS EC2
+
+#### 서버 24시간 작동시키는 방법
+- 집에 PC를 24시간 구동
+- 호스팅 서비스(Cafe 24, 코리아 호스팅 등)를 이용
+- 클라우드 서비스(AWS, AZURE, GCP 등)를 이용
+- 일반적으로 비용은 호스팅 서비스나 집PC를 이용하는 것이 저렴
+- 그러나, 특정 시간에만 트래픽이 몰린다면 유동적으로 사양을 늘릴 수 있는 클라우드가 유리
+
+####
+
