@@ -267,5 +267,18 @@ compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 - 일반적으로 비용은 호스팅 서비스나 집PC를 이용하는 것이 저렴
 - 그러나, 특정 시간에만 트래픽이 몰린다면 유동적으로 사양을 늘릴 수 있는 클라우드가 유리
 
-####
+#### 클라우드 형태
+- Infrastructure as a Service (IaaS, 아이아스, 이에스)
+  - 기존 물리 장비를 미들웨어와 함께 묶어둔 추상화 서비스
+  - 가상머신, 스토리지, 네트워크, 운영체제 등의 IT 인프라를 대여해 주는 서비스
+  - AWS의 EC2, S3 등 
+- Platform as a Service (PaaS, 파스)  
+  - 앞에서 언급한 IaaS에서 한번 더 추상화한 서비스
+  - 한번 더 추상화했기 때문에 많은 기능이 자동화
+  - AWS의 Beanstalk, Heroku 등
+- Software as a Service (SaaS, 사스)
+  - 소프트웨어 서비스
+  - 구글 드라이브, 드랍박스, 와탭 등
+  
+  
 
