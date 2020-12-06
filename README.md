@@ -289,8 +289,13 @@ compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 
 #### 아마존 리눅스 서버 생성 시 초기 설정
 - Java 8 설치
+  - sudo yum install -y java-1.8.0-openjdk-devel.x86_64
+  - sudo /usr/sbin/alternatives --config java
 - 타임존 변경 : 기본 서버의 시간은 미국 시간대
+  - sudo rm /etc/localtime
+  - sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+  - date 
 - 호스트네임 변경 : 현재 접속한 서버의 별명을 등록
-
-
+  - sudo hostnamectl set-hostname 원하는 호스트명
+  - sudo vim /etc/hosts => HOSTNAME = 원하는 호스트명
 
