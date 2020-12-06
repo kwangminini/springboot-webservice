@@ -280,5 +280,10 @@ compile('org.springframework.boot:spring-boot-starter-oauth2-client')
   - 소프트웨어 서비스
   - 구글 드라이브, 드랍박스, 와탭 등
   
+#### EC2 인스턴스
+- 인스턴스도 하나의 서버이기 때문에 IP 존재
+- 같은 인스턴스를 중지하고 다시 시작할 때도 새 IP가 할당
+- 따라서, 매번 변경되지 않도록 고정 IP(Elastic IP, EIP) 생성해줘야함
+  
   
 
