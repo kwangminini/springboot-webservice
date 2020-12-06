@@ -284,6 +284,8 @@ compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 - 인스턴스도 하나의 서버이기 때문에 IP 존재
 - 같은 인스턴스를 중지하고 다시 시작할 때도 새 IP가 할당
 - 따라서, 매번 변경되지 않도록 고정 IP(Elastic IP, EIP) 생성해줘야함
-  
+- EIP는 생성하고 EC2 서버에 연결하지 않으면 비용 발생
+- 즉, 생성한 EIP는 무조건 EC2에 바로 연결하고 더는 사용할 인스턴스가 없을 때도 EIP는 삭제해야한다
+
   
 
